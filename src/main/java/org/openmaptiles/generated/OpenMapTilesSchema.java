@@ -1049,6 +1049,10 @@ public class OpenMapTilesSchema {
        * </ul>
        */
       public static final String SURFACE = "surface";
+
+      public static final String SMOOTHNESS = "smoothness";
+
+      public static final String TRACKTYPE = "tracktype";
     }
     /** Attribute values for map elements in the transportation layer. */
     final class FieldValues {

@@ -323,11 +323,13 @@ public class Tables {
     @Override boolean isFord, @Override int isOneway, @Override boolean isArea, @Override String service,
     @Override String access, @Override boolean toll, @Override String usage, @Override String publicTransport,
     @Override String manMade, @Override String bicycle, @Override String foot, @Override String horse,
-    @Override String mtbScale, @Override String sacScale, @Override String surface, @Override boolean expressway,
+    @Override String mtbScale, @Override String sacScale, @Override String surface, @Override String smoothness,
+    @Override String tracktype, @Override boolean expressway,
     @Override SourceFeature source) implements Row, WithHighway, WithConstruction, WithRef, WithNetwork, WithZOrder,
     WithLayer, WithLevel, WithIndoor, WithName, WithNameEn, WithNameDe, WithShortName, WithIsTunnel, WithIsBridge,
     WithIsRamp, WithIsFord, WithIsOneway, WithIsArea, WithService, WithAccess, WithToll, WithUsage, WithPublicTransport,
-    WithManMade, WithBicycle, WithFoot, WithHorse, WithMtbScale, WithSacScale, WithSurface, WithExpressway, WithSource {
+    WithManMade, WithBicycle, WithFoot, WithHorse, WithMtbScale, WithSacScale, WithSurface, WithSmoothness,
+    WithTracktype, WithExpressway, WithSource {
     public OsmHighwayLinestring(SourceFeature source, String mappingKey) {
       this(source.getString("highway"), source.getString("construction"), source.getString("ref"),
         source.getString("network"), source.getWayZorder(), source.getLong("layer"), source.getLong("level"),
@@ -337,7 +339,8 @@ public class Tables {
         source.getString("service"), source.getString("access"), source.getBoolean("toll"), source.getString("usage"),
         source.getString("public_transport"), source.getString("man_made"), source.getString("bicycle"),
         source.getString("foot"), source.getString("horse"), source.getString("mtb:scale"),
-        source.getString("sac_scale"), source.getString("surface"), source.getBoolean("expressway"), source);
+        source.getString("sac_scale"), source.getString("surface"), source.getString("smoothness"),
+        source.getString("tracktype"), source.getBoolean("expressway"), source);
     }
 
     /** Imposm3 "mapping" to filter OSM elements that should appear in this "table". */
@@ -1233,6 +1236,14 @@ public class Tables {
   /** Rows with a String surface attribute. */
   public interface WithSurface {
     String surface();
+  }
+
+  public interface WithSmoothness {
+      String smoothness();
+  }
+
+  public interface WithTracktype {
+      String tracktype();
   }
 
   /** Rows with a boolean toll attribute. */

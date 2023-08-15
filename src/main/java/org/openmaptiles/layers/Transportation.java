@@ -182,10 +182,9 @@ public class Transportation implements
     );
   }
 
-  /** Returns a value for {@code surface} tag constrained to a small set of known values from raw OSM data. */
+  /** Returns the value for {@code surface} tag. */
   private static String surface(String value) {
-    return value == null ? null : SURFACE_PAVED_VALUES.contains(value) ? FieldValues.SURFACE_PAVED :
-      SURFACE_UNPAVED_VALUES.contains(value) ? FieldValues.SURFACE_UNPAVED : null;
+      return value;
   }
 
   /** Returns a value for {@code access} tag constrained to a small set of known values from raw OSM data. */
@@ -379,7 +378,9 @@ public class Transportation implements
         // z12+
         .setAttrWithMinzoom(Fields.SERVICE, service, 12)
         .setAttrWithMinzoom(Fields.ONEWAY, nullIfInt(element.isOneway(), 0), 12)
-        .setAttrWithMinzoom(Fields.SURFACE, surface(element.surface()), 12)
+        .setAttrWithMinzoom(Fields.SURFACE, surface(element.surface()), 11)
+        .setAttrWithMinzoom(Fields.SMOOTHNESS, surface(element.smoothness()), 11)
+        .setAttrWithMinzoom(Fields.TRACKTYPE, surface(element.tracktype()), 11)
         .setMinPixelSize(0) // merge during post-processing, then limit by size
         .setSortKey(element.zOrder())
         .setMinZoom(minzoom);
