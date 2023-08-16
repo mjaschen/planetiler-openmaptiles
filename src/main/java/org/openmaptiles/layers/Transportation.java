@@ -407,13 +407,13 @@ public class Transportation implements
     if ("pier".equals(element.manMade())) {
       minzoom = 13;
     } else if (isResidentialOrUnclassified(highway)) {
-      minzoom = 12;
+      minzoom = 11;
     } else {
       String baseClass = highwayClass.replace("_construction", "");
       minzoom = switch (baseClass) {
-        case FieldValues.CLASS_SERVICE -> isDrivewayOrParkingAisle(service(element.service())) ? 14 : 13;
-        case FieldValues.CLASS_TRACK, FieldValues.CLASS_PATH -> routeRank == 1 ? 12 :
-          (z13Paths || !nullOrEmpty(element.name()) || routeRank <= 2 || !nullOrEmpty(element.sacScale())) ? 13 : 14;
+        case FieldValues.CLASS_SERVICE -> isDrivewayOrParkingAisle(service(element.service())) ? 13 : 12;
+        case FieldValues.CLASS_TRACK, FieldValues.CLASS_PATH -> routeRank == 1 ? 11 :
+          (z13Paths || !nullOrEmpty(element.name()) || routeRank <= 2 || !nullOrEmpty(element.sacScale())) ? 11 : 12;
         default -> MINZOOMS.getOrDefault(baseClass, Integer.MAX_VALUE);
       };
     }
