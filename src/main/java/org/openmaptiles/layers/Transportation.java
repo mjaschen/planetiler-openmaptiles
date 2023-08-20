@@ -167,14 +167,14 @@ public class Transportation implements
       false
     );
     MINZOOMS = Map.ofEntries(
-      entry(FieldValues.CLASS_PATH, z13Paths ? 13 : 14),
-      entry(FieldValues.CLASS_TRACK, 14),
-      entry(FieldValues.CLASS_SERVICE, 13),
-      entry(FieldValues.CLASS_MINOR, 13),
+      entry(FieldValues.CLASS_PATH, 11),
+      entry(FieldValues.CLASS_TRACK, 11),
+      entry(FieldValues.CLASS_SERVICE, 11),
+      entry(FieldValues.CLASS_MINOR, 11),
       entry(FieldValues.CLASS_RACEWAY, 12),
-      entry(FieldValues.CLASS_TERTIARY, 11),
-      entry(FieldValues.CLASS_BUSWAY, 11),
-      entry(FieldValues.CLASS_BUS_GUIDEWAY, 11),
+      entry(FieldValues.CLASS_TERTIARY, 10),
+      entry(FieldValues.CLASS_BUSWAY, 10),
+      entry(FieldValues.CLASS_BUS_GUIDEWAY, 10),
       entry(FieldValues.CLASS_SECONDARY, 9),
       entry(FieldValues.CLASS_PRIMARY, 7),
       entry(FieldValues.CLASS_TRUNK, 5),
@@ -376,7 +376,7 @@ public class Transportation implements
         .setAttr(Fields.RAMP, minzoom >= 12 ? rampAboveZ12 :
           ((ZoomFunction<Integer>) z -> z < 9 ? null : z >= 12 ? rampAboveZ12 : rampBelowZ12))
         // z12+
-        .setAttrWithMinzoom(Fields.SERVICE, service, 12)
+        .setAttrWithMinzoom(Fields.SERVICE, service, 11)
         .setAttrWithMinzoom(Fields.ONEWAY, nullIfInt(element.isOneway(), 0), 12)
         .setAttrWithMinzoom(Fields.SURFACE, surface(element.surface()), 11)
         .setAttrWithMinzoom(Fields.SMOOTHNESS, surface(element.smoothness()), 11)
@@ -411,9 +411,8 @@ public class Transportation implements
     } else {
       String baseClass = highwayClass.replace("_construction", "");
       minzoom = switch (baseClass) {
-        case FieldValues.CLASS_SERVICE -> isDrivewayOrParkingAisle(service(element.service())) ? 13 : 12;
-        case FieldValues.CLASS_TRACK, FieldValues.CLASS_PATH -> routeRank == 1 ? 11 :
-          (z13Paths || !nullOrEmpty(element.name()) || routeRank <= 2 || !nullOrEmpty(element.sacScale())) ? 11 : 12;
+        case FieldValues.CLASS_SERVICE -> isDrivewayOrParkingAisle(service(element.service())) ? 12 : 11;
+        case FieldValues.CLASS_TRACK, FieldValues.CLASS_PATH -> 11;
         default -> MINZOOMS.getOrDefault(baseClass, Integer.MAX_VALUE);
       };
     }
