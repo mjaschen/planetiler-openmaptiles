@@ -16,8 +16,19 @@ Or to build from source, after [installing Java 21+](https://adoptium.net/instal
 ```bash
 # Build the project (use mvnw.cmd on windows):
 ./mvnw clean package
+# Build without running tests:
+./mvnw -DskipTests=true clean package
 # Then run:
 java -jar target/*with-deps.jar --force --download --area=monaco
+# For Gravel Overlay:
+mkdir -p data/sources
+curl -L -o data/sources/brandenburg.osm.pbf http://download.geofabrik.de/europe/germany/brandenburg-latest.osm.pbf
+osmium tags-filter data/sources/brandenburg.osm.pbf 'highway=*' -o data/sources/bb.osm.pbf
+java -jar target/*with-deps.jar --force --area=bb
+# Testing:
+pmtiles convert data/output.mbtiles data/bb.pmtiles
+open https://protomaps.github.io/PMTiles/
+# -> upload PMTiles and inspect
 ```
 
 See [Planetiler README.md](https://github.com/onthegomap/planetiler/blob/main/README.md) for more description of the
